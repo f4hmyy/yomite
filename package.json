@@ -1,0 +1,9 @@
+{
+  "name": "yomite-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local API and static server for Yomite catalog",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

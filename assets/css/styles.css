@@ -1,0 +1,191 @@
+:root {
+  color-scheme: dark;
+}
+
+body.yomite-bg {
+  background-image:
+    radial-gradient(circle at 12% 15%, rgba(56, 189, 248, 0.26), transparent 30%),
+    radial-gradient(circle at 88% 20%, rgba(251, 113, 133, 0.2), transparent 28%),
+    radial-gradient(circle at 65% 82%, rgba(45, 212, 191, 0.2), transparent 30%),
+    linear-gradient(145deg, #070b16 0%, #0c1224 40%, #131f3c 100%);
+}
+
+body.yomite-bg-light {
+  background-image:
+    radial-gradient(circle at 12% 15%, rgba(56, 189, 248, 0.12), transparent 32%),
+    radial-gradient(circle at 88% 20%, rgba(251, 113, 133, 0.1), transparent 30%),
+    linear-gradient(145deg, #f5f7fb 0%, #f0f5ff 52%, #eef9fb 100%);
+}
+
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 40px rgba(8, 15, 35, 0.45);
+}
+
+.glass-soft {
+  background: rgba(11, 16, 32, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+html:not(.dark) .glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.24);
+}
+
+.float-orb {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+.float-orb.delay {
+  animation-delay: 900ms;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeup 700ms ease forwards;
+}
+
+@keyframes fadeup {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.genre-chip.active {
+  border-color: rgba(34, 211, 238, 0.75);
+  background: rgba(34, 211, 238, 0.15);
+  color: #cffafe;
+}
+
+html:not(.dark) .genre-chip.active {
+  color: #0f172a;
+}
+
+.modal-overlay {
+  background: rgba(2, 6, 23, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.section-title {
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 0.35rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(251, 113, 133, 1), rgba(248, 113, 113, 0.45));
+}
+
+.hero-spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(2, 6, 23, 0.86) 18%, rgba(2, 6, 23, 0.68) 52%, rgba(2, 6, 23, 0.42) 100%);
+  pointer-events: none;
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+  filter: saturate(1.1) contrast(1.05);
+}
+
+.poster-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 14, 28, 0.72);
+}
+
+.poster-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.poster-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 24%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.episode-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid rgba(251, 113, 133, 0.5);
+  background: rgba(251, 113, 133, 0.18);
+  color: #ffe4e6;
+}
+
+.trend-item {
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 14, 28, 0.55);
+}
+
+.trend-rank {
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  background: rgba(248, 113, 113, 0.15);
+  color: #fecaca;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}

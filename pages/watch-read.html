@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yomite Watch / Read</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['Sora', 'system-ui', 'sans-serif'],
+              body: ['Outfit', 'system-ui', 'sans-serif']
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body class="yomite-bg min-h-screen text-slate-100 font-body">
+    <header class="relative z-10 px-4 sm:px-8 pt-6">
+      <nav class="max-w-7xl mx-auto glass rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+        <a href="../index.html" class="flex items-center gap-3">
+          <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-cyan-300 to-rose-400"></div>
+          <div>
+            <p class="font-display font-extrabold text-lg leading-none">Yomite</p>
+            <p class="text-xs text-slate-300">Watch / Read</p>
+          </div>
+        </a>
+
+        <div class="hidden md:flex items-center gap-2 text-sm">
+          <a href="./catalog.html" class="px-3 py-2 rounded-lg hover:bg-white/10 transition">Catalog</a>
+          <a href="./details.html" class="px-3 py-2 rounded-lg hover:bg-white/10 transition">Details</a>
+          <button data-open-auth class="px-3 py-2 rounded-lg hover:bg-white/10 transition">Sign In</button>
+        </div>
+
+        <button id="themeToggle" class="px-3 py-2 rounded-lg text-sm font-medium bg-slate-900/60 border border-white/20">Theme</button>
+      </nav>
+    </header>
+
+    <main class="relative z-10 px-4 sm:px-8 pb-12">
+      <section class="max-w-7xl mx-auto mt-7 glass rounded-3xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h1 id="watchReadTitle" class="font-display text-3xl sm:text-4xl font-extrabold">Title</h1>
+            <p id="watchReadMeta" class="text-slate-300 mt-2">Type • Year • Status</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="watchModeBtn" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition">Watch Mode</button>
+            <button id="readModeBtn" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition">Read Mode</button>
+          </div>
+        </div>
+
+        <p id="watchReadDescription" class="text-slate-200 mt-4">Description</p>
+
+        <div class="mt-4 rounded-xl bg-slate-900/55 border border-white/15 p-3 text-sm text-cyan-200" id="apiStatus"></div>
+        <div id="apiError" class="hidden mt-3 rounded-xl bg-red-500/20 border border-red-300/25 px-3 py-2 text-sm text-red-100">
+          Unable to fetch /api/catalog. Start the local server with npm start.
+        </div>
+      </section>
+
+      <section class="max-w-7xl mx-auto mt-6 grid lg:grid-cols-12 gap-4">
+        <article id="watchPanel" class="lg:col-span-8 glass rounded-3xl p-4 sm:p-5">
+          <div class="rounded-2xl border border-white/20 bg-slate-950/85 p-3 sm:p-4">
+            <video
+              id="watchPlayer"
+              controls
+              preload="metadata"
+              class="w-full aspect-video rounded-xl border border-white/15 bg-black"
+            >
+              Your browser does not support the video tag.
+            </video>
+            <div class="mt-3">
+              <p class="text-xs uppercase tracking-[0.2em] text-cyan-200">Now Playing</p>
+              <h2 id="playerTitle" class="font-display text-2xl font-bold mt-1">Episode</h2>
+              <p id="playerMeta" class="text-sm text-slate-300 mt-1">Duration</p>
+            </div>
+          </div>
+          <div class="mt-4 glass-soft rounded-xl p-3">
+            <p class="text-sm text-slate-300">Auto Next • Subtitles • Quality • Playback speed</p>
+          </div>
+        </article>
+
+        <article id="readPanel" class="lg:col-span-8 glass rounded-3xl p-4 sm:p-5 hidden">
+          <div class="rounded-2xl border border-white/20 bg-slate-900/65 p-4 sm:p-5">
+            <p id="chapterMeta" class="text-xs uppercase tracking-[0.2em] text-cyan-200">Pages</p>
+            <h2 id="chapterTitle" class="font-display text-2xl font-bold mt-2">Chapter</h2>
+            <p id="chapterSummary" class="text-sm text-slate-200 mt-3">Chapter summary.</p>
+
+            <div class="mt-5 rounded-2xl bg-slate-950/70 border border-white/10 p-3 sm:p-4">
+              <img
+                id="readerImage"
+                src=""
+                alt="Reader page"
+                class="w-full max-h-[70vh] object-contain rounded-xl border border-white/10 bg-black/30"
+              />
+
+              <div class="mt-3 flex items-center justify-between gap-3">
+                <button id="prevPageBtn" class="px-4 py-2 rounded-lg border border-white/25 hover:bg-white/10 transition">
+                  Prev Page
+                </button>
+                <p id="readerPageInfo" class="text-sm text-slate-300">Page 1 / 1</p>
+                <button id="nextPageBtn" class="px-4 py-2 rounded-lg border border-white/25 hover:bg-white/10 transition">
+                  Next Page
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="lg:col-span-4 glass rounded-3xl p-4 sm:p-5">
+          <h3 class="font-display text-xl font-semibold">Episode Queue</h3>
+          <div id="episodeList" class="mt-3 space-y-2"></div>
+
+          <h3 class="font-display text-xl font-semibold mt-6">Chapter Queue</h3>
+          <div id="chapterList" class="mt-3 space-y-2"></div>
+        </aside>
+      </section>
+    </main>
+
+    <div id="authModal" class="hidden fixed inset-0 z-50 modal-overlay px-4 py-8">
+      <div class="max-w-md mx-auto glass rounded-2xl p-5 sm:p-6 mt-16">
+        <div class="flex items-center justify-between">
+          <h2 class="font-display text-xl font-bold">Sign In</h2>
+          <button id="closeAuthModal" class="text-slate-300 hover:text-white">Close</button>
+        </div>
+        <form class="mt-4 space-y-3">
+          <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-white/20 focus:outline-none" />
+          <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-white/20 focus:outline-none" />
+          <button type="button" class="w-full px-4 py-3 rounded-xl font-semibold bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-900">Continue</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="../assets/js/app.js"></script>
+  </body>
+</html>
