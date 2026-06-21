@@ -1,0 +1,12 @@
+# Ignore Mac system files
+.DS_Store
+
+# Ignore Node dependencies
+node_modules/
+
+# Ignore environment variables (secrets)
+.env
+
+# Ignore log files
+*.log
+npm-debug.log*
